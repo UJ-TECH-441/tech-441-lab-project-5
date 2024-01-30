@@ -1,0 +1,17 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+* {
+	font: 400 16px Rubik, sans-serif;
+}
+
+#chart {
+}
+
+#artists {
+}
