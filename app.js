@@ -4,6 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
+const hbs = require('hbs');
 require('dotenv').config({ path: ['.env.local', '.env'] });
 
 // Create Express instance
@@ -19,6 +20,10 @@ app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
+
+// Configure views
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 // Register all files in the /routes directory as Express routes
 const routesDir = path.join(__dirname, 'routes');

@@ -1,0 +1,24 @@
+<link href="/css/song-charts.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script>let songId = '{{songId}}'; let artistId = '{{artistId}}';</script>
+<script src="/js/main.js"></script>
+<script src="/js/song-charts-all.js"></script>
+
+<div id="chartjs-canvas-container">
+	<header>
+		<div id="title"></div>
+		<div id="subtitle">Click titles to see details for specific songs</div>
+	</header>
+	<span>
+		<canvas id="chartjs-canvas"></canvas>
+		<footer>
+			<div>
+				<select id="artists"></select>
+			</div>
+			<div>
+				<select id="chart-date"></select>
+			</div>
+		</footer>
+	</span>
+</div>

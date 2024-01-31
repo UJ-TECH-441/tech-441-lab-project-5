@@ -1,0 +1,37 @@
+<link href="/css/chart-view.css" rel="stylesheet">
+<script>const chartId = '{{id}}';</script>
+<script src="/js/main.js"></script>
+<script src="/js/chart-view.js"></script>
+<header>
+	<div id="title">Top 100 Songs:</div>
+	<div>
+		<select id="chart-date"></select>
+	</div>
+</header>
+<main>
+	<div id="chart-table-container">
+		<table id="chart-table">
+			<tbody>
+				<tr>
+					<td>#</td>
+					<td>Title</td>
+					<td>Artist</td>
+				</tr>
+				{{#each data}}
+					<tr>
+						<td>{{position}}</td>
+						<td>{{song_title}}</td>
+						<td><a href="/artists/{{artist_id}}/songs">{{artist_name}}</a></td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<footer>
+			<div>
+				<select id="artists"></select>
+			</div>
+		</footer>
+	</div>
+</main>
+
+

@@ -1,0 +1,30 @@
+header {
+	flex-direction: row !important;
+	margin-bottom: 20px;
+}
+
+select, option {
+	font-size: 1.3rem;
+}
+
+#chart-table {
+	margin: auto;
+	border-spacing: 0;
+	border-collapse: separate;
+	margin-bottom: 50px;
+}
+
+#chart-table tr td {
+	padding: .2rem .7rem;
+	border-bottom: solid 1px #ccc;
+}
+
+#chart-table tr:first-child td {
+	font-weight: bold;
+	background-color: #dedede;
+}
+
+#chart-table tr td:first-child {
+	font-weight: 800;
+	text-align: right;
+}

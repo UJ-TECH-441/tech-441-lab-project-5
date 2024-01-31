@@ -6,12 +6,55 @@ html {
 	box-sizing: inherit;
 }
 
-* {
+*, select {
 	font: 400 16px Rubik, sans-serif;
 }
 
-#chart {
+header {
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-#artists {
+#title, #title > a {
+	font-weight: 500;
+	font-size: 1.5rem;
+	color: #1880e7;
+}
+
+#title {
+	text-align: center;
+	padding: 10px;
+}
+
+#subtitle {
+	text-align: center;
+	padding: 10px;
+}
+
+#chartjs-canvas-container {
+	position: relative;
+	height: 40vh;
+	width: 99vw;
+}
+
+#chartjs-canvas-container > span {
+	text-align: center;
+}
+
+footer {
+	visibility: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	border-top: dashed 1px #ccc;
+	margin: 10px 0 40px 0;
+	padding-top: 20px;
+}
+
+footer > div {
+	margin: 0 20px;
 }
