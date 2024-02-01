@@ -10,8 +10,6 @@ $(document).ready(function() {
 const selectArtist = () => {
 	const artistId = $('#artists').val();
 	location.href = `/artists/${artistId}/songs`;
-	//const artistId = $('#artists').val();
-	//getSongs(artistId);
 }
 
 const getSongs = artistId => {
