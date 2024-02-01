@@ -4,7 +4,7 @@ $(document).ready(function() {
 	fetchArtists();
 	fetchChartDates();
 	$('#artists').on('change', () => {
-		const artistId = $('#artists').val()
+		const artistId = $('#artists').val();
 		location.href = `/artists/${artistId}/songs`;
 	});
 	$('#artist-other-songs').on('change', () => {
@@ -22,7 +22,7 @@ const getCharts = songId => {
 		return res.json();
 	})
 	.then(json => {
-		$('#title').html(`"${json[0].song_title}" by <a href="/artists/${json[0].artist_id}/songs">${json[0].artist_name}</a>`);
+		$('.title').html(`"${json[0].song_title}" by <a href="/artists/${json[0].artist_id}/songs">${json[0].artist_name}</a>`);
 		fetch(`/fetch/artists/${json[0].artist_id}/songs`)
 			.then(res => {
 				if (!res.ok) throw new Error(res.statusText);

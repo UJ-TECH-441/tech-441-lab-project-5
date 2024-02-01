@@ -7,6 +7,10 @@ select, option {
 	font-size: 1.3rem;
 }
 
+td {
+	white-space: nowrap;
+}
+
 #chart-table {
 	margin: auto;
 	border-spacing: 0;
@@ -27,4 +31,20 @@ select, option {
 #chart-table tr td:first-child {
 	font-weight: 800;
 	text-align: right;
+}
+
+.change-new {
+	color: #6aadff;
+}
+
+.change-up {
+	color: #009f00;
+}
+
+.change-down {
+	color: #df0000;
+}
+
+.change-none {
+	color: #ccc;
 }

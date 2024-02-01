@@ -24,7 +24,7 @@ const fetchArtists = artistId => {
 		.then(json => {
 			$('#artists').append(`<option value="">Select artist</option>`);
 			json.forEach(artist => {
-				$('#artists').append(`<option value="${artist.id}">${artist.name}</option>`);
+				$('#artists').append(`<option value="${artist.id}">${artist.name.substring(0, 50)}</option>`);
 			})
 			if (artistId) $('#artists').val(artistId);
 		})

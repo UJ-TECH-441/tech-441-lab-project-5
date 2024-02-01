@@ -4,7 +4,7 @@ $(document).ready(function() {
 	fetchArtists();
 	fetchChartDates();
 	$('#artists').on('change', () => {
-		const artistId = $('#artists').val()
+		const artistId = $('#artists').val();
 		location.href = `/artists/${artistId}/songs`;
 	});
 	if (artistId) getCharts(artistId);
@@ -18,13 +18,14 @@ const getCharts = artistId => {
 		return res.json();
 	})
 	.then(json => {
-		$('#title').html(`All songs by ${json.charts[0][0].artist_name}`);
+		$('.title').html(`All songs by ${json.charts[0][0].artist_name}`);
 		if (currentChart) currentChart.destroy();
 		Chart.register(ChartDataLabels);
 		const data = {
 			labels: json.dates.map(date => date.substring(0, 10)),
 			datasets: json.charts.map(song => {
 				const data = {};
+				console.log(song);
 				song.forEach(song  => data[song.date.substring(0, 10)] = song.position);
 				return {
 					label: song[0].song_title,

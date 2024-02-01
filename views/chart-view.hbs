@@ -2,8 +2,9 @@
 <script>const chartId = '{{id}}';</script>
 <script src="/js/main.js"></script>
 <script src="/js/chart-view.js"></script>
+<script src="//kit.fontawesome.com/3d786f588f.js" crossorigin="anonymous"></script>
 <header>
-	<div id="title">Top 100 Songs:</div>
+	<div class="title">Top 100 Songs:</div>
 	<div>
 		<select id="chart-date"></select>
 	</div>
@@ -16,12 +17,36 @@
 					<td>#</td>
 					<td>Title</td>
 					<td>Artist</td>
+					<td>Change</td>
 				</tr>
 				{{#each data}}
 					<tr>
-						<td>{{position}}</td>
-						<td>{{song_title}}</td>
+						<td>
+							{{position}}
+						</td>
+						<td><a href="/songs/{{song_id}}/charts">{{song_title}}</a></td>
 						<td><a href="/artists/{{artist_id}}/songs">{{artist_name}}</a></td>
+						<td>
+							{{#if isFirstWeek}}
+								<span class="change-new">NEW</span>
+							{{else}}
+								{{#if changeNone}}
+									<i class="fa-solid fa-circle change-none"></i>
+								{{else}}
+									{{#if changeUp}}
+										<span class="change-up">
+											<i class="fa-regular fa-circle-up"></i>
+											{{change}}
+										</span>
+									{{else}}
+										<span class="change-down">
+											<i class="fa-regular fa-circle-down change-down"></i>
+											{{change}}
+										</span>
+									{{/if}}
+								{{/if}}
+							{{/if}}
+						</td>
 					</tr>
 				{{/each}}
 			</tbody>

@@ -4,7 +4,8 @@ const util = require('../util');
 
 module.exports = app => {
 	app.get('/fetch/artists', async (req, res, next) => {
-		const data = await database.select(`select * from music.artist order by name`);
+		const data = await database.select(`select * from artist order by name`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.json(data[0]);
 	});
 
@@ -12,6 +13,8 @@ module.exports = app => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
 		const data = await database.select(`select * from chart_view where artist_id = '${artistId}' order by song_id, date`);
+		if (data[0].length === 0) return res.sendStatus(404);
+
 		const songs = {};
 		let minDate, maxDate;
 		data[0].forEach(chartWeek => {
@@ -37,7 +40,8 @@ module.exports = app => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
 		const data = await database.select(
-			`select * from music.artist_song_view where artist_id = '${req.params.id}' order by song_title`);
+			`select * from artist_song_view where artist_id = '${req.params.id}' order by song_title`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.json(data[0]);
 	});
 
@@ -45,6 +49,7 @@ module.exports = app => {
 		const songId = req.params.id;
 		if (!songId || !util.isValidUuid(songId)) return res.sendStatus(400);
 		const data = await database.select(`select * from chart_view where song_id = '${songId}' order by date`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.json(data[0]);
 	});
 };

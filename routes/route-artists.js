@@ -6,18 +6,21 @@ module.exports = app => {
 	app.get('/artists/:id/songs/charts', async (req, res, next) => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
+		const data = await database.select(`select name from artist where id='${artistId}'`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.render('song-charts-all', { artistId });
 	});
 
 	app.get('/artists/:id/songs', async (req, res, next) => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
-		const data = await database.select(`select name from music.artist where id='${artistId}'`);
+		const data = await database.select(`select name from artist where id='${artistId}'`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.render('artist-songs', { artistId, artistName: data[0][0].name });
 	});
 
 	app.get('/fetch/artists', async (req, res, next) => {
-		const data = await database.select(`select * from music.artist order by name`);
+		const data = await database.select(`select * from artist order by name`);
 		res.json(data[0]);
 	});
 
@@ -25,6 +28,7 @@ module.exports = app => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
 		const data = await database.select(`select * from chart_view where artist_id = '${artistId}' order by song_id, date`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		const songs = {};
 		let minDate, maxDate;
 		data[0].forEach(chartWeek => {
@@ -50,7 +54,8 @@ module.exports = app => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
 		const data = await database.select(
-			`select * from music.artist_song_view where artist_id = '${req.params.id}' order by song_title`);
+			`select * from artist_song_view where artist_id = '${req.params.id}' order by song_title`);
+		if (data[0].length === 0) return res.sendStatus(404);
 		res.json(data[0]);
 	});
 };

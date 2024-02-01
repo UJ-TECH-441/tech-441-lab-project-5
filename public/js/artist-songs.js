@@ -20,12 +20,12 @@ const getSongs = artistId => {
 		return res.json();
 	})
 	.then(json => {
-		$('#title').html(`${json[0].artist_name}: Chart Performance`);
+		$('.title').html(`${json[0].artist_name}: Chart Performance`);
 		if (currentChart) currentChart.destroy();
 		Chart.register(ChartDataLabels);
-		const labels = json.map(song => song.first_week.substring(0, 10));
+		const labels = json.map(song => song.peak_week.substring(0, 10));
 		const data = {
-			labels: json.map(song => song.first_week.substring(0, 10)),
+			labels: json.map(song => song.peak_week.substring(0, 10)),
 			datasets: [{
 				label: 'Chart Position',
 				data: json.map(song => song.peak_position),

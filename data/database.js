@@ -4,7 +4,7 @@ const connect = async () => await mysql.createConnection({
 	host: 'localhost',
 	user: process.env.DATABASE_ID,
 	password: process.env.DATABASE_PASSWORD,
-	database: 'music'
+	database: process.env.DATABASE_NAME
 });
 
 const disconnect = async conn => await conn.end();
