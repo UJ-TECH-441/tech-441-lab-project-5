@@ -9,21 +9,25 @@
 	<header>
 		<div class="title"></div>
 		<div class="subtitle">
-			Click titles to view chart performance graphs;
+			<span class="bold">
+				<a class="bold" href="/artists/{{artistId}}/songs/charts">View all {{artistName}} songs by weekly performance</a>
+			</span>
 			<p/>
-			<a href="/artists/{{artistId}}/songs/charts">View all {{artistName}} songs by weekly performance</a>
+			Click titles to view chart performance graphs
 		</div>
 	</header>
 	<canvas id="chartjs-canvas"></canvas>
-	<div class="subtitle">
-		Dates shown are the weeks when each song first reached its highest position
-	</div>
 	<footer>
-		<div>
-			<select id="artists"></select>
+		<div class="subtitle">
+			Dates shown are the weeks when each song first reached its highest position
 		</div>
-		<div>
-			<select id="chart-date"></select>
+		<div class="footer-select">
+			<div>
+				<select id="artists"></select>
+			</div>
+			<div>
+				<select id="chart-date"></select>
+			</div>
 		</div>
 	</footer>
 </span>

@@ -6,3 +6,7 @@ select, option {
 	margin: 15px;
 	text-align: center;
 }
+
+.subtitle {
+	padding-bottom: 10px;
+}

@@ -20,18 +20,24 @@
 					<td>Change</td>
 				</tr>
 				{{#each data}}
-					<tr>
+					<tr class="{{#if isTop40}}top-40{{/if}} {{#if isTop10}}top-10{{/if}}">
 						<td>
 							{{position}}
 						</td>
-						<td><a href="/songs/{{song_id}}/charts">{{song_title}}</a></td>
-						<td><a href="/artists/{{artist_id}}/songs">{{artist_name}}</a></td>
+						<td>
+							<a href="/songs/{{song_id}}/charts">{{song_title}}</a>
+						</td>
+						<td>
+							<a href="/artists/{{artist_id}}/songs">{{artist_name}}</a>
+						</td>
 						<td>
 							{{#if isFirstWeek}}
 								<span class="change-new">NEW</span>
 							{{else}}
 								{{#if changeNone}}
-									<i class="fa-solid fa-circle change-none"></i>
+									<span class="change-none">
+										<i class="fa-regular fa-circle-pause change-none"></i> 0
+									</span>
 								{{else}}
 									{{#if changeUp}}
 										<span class="change-up">
@@ -52,8 +58,10 @@
 			</tbody>
 		</table>
 		<footer>
-			<div>
-				<select id="artists"></select>
+			<div class="footer-select">
+				<div>
+					<select id="artists"></select>
+				</div>
 			</div>
 		</footer>
 	</div>

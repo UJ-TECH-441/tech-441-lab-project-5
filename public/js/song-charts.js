@@ -1,4 +1,5 @@
 let currentChart;
+let otherSongs = {};
 
 $(document).ready(function() {
 	fetchArtists();
@@ -22,7 +23,6 @@ const getCharts = songId => {
 		return res.json();
 	})
 	.then(json => {
-		$('.title').html(`"${json[0].song_title}" by <a href="/artists/${json[0].artist_id}/songs">${json[0].artist_name}</a>`);
 		fetch(`/fetch/artists/${json[0].artist_id}/songs`)
 			.then(res => {
 				if (!res.ok) throw new Error(res.statusText);
@@ -31,10 +31,13 @@ const getCharts = songId => {
 			.then(songs => {
 				if ($('#artist-other-songs').children().length === 0) {
 					$('#artist-other-songs').append(`<option value="">Other songs by ${json[0].artist_name}</option>`);
+					otherSongs = {};
 					songs.forEach(song => {
+						otherSongs[song.song_id] = song.song_title;
 						$('#artist-other-songs').append(`<option value="${song.song_id}">${song.song_title} (#${song.peak_position}, ${song.first_week.substring(0, 4)})</option>`);
 					})
 				}
+				$('#songTitle').text(`"${otherSongs[songId]}"`);
 				if (songs.length <= 1) {
 					$('#artist-other-songs-container').hide();
 				} else {
@@ -54,11 +57,15 @@ const getCharts = songId => {
 			datasets: [{
 				label: 'Chart Position',
 				data: json.map(song => song.position),
-				borderColor: '#1880e7',
+				borderColor: '#a8cff7',
 				clip: false,
 				tension: 0.1,
 				pointRadius: 5,
-				pointBackgroundColor: '#1880e7'
+				pointBackgroundColor: '#1880e7',
+				pointBorderColor: '#1469be',
+				pointHoverRadius: 10,
+				pointHoverBackgroundColor: '#ffcc00',
+				pointHoverBorderColor: '#eabb00'
 			}],
 		};
 
@@ -73,26 +80,39 @@ const getCharts = songId => {
 						$('footer').css('visibility', 'visible');
 					}
 				},
+				onClick: event => {
+					const points = currentChart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, true);
+					if (points.length) location.href = `/charts/${json[points[0].index].date.substring(0, 10)}`;
+				},
 				plugins: {
 					legend: {
 						position: 'top',
+						labels: {
+							color: 'black',
+							font: {
+								family: 'Rubik,sans-serif',
+								size: 13,
+								weight: 500
+							}
+						}
 					},
 					datalabels: {
 						color: 'black',
 						font: {
-							size: 14,
+							size: 16,
 							family: 'Rubik,sans-serif',
-							weight: 'bold'
+							weight: 500
 						},
 						align: 'bottom',
 						offset: 10,
 						formatter: (value, ctx) => json[ctx.dataIndex].position,
 						listeners: {
-							click: (ctx, event) => {
-								console.log(json[ctx.dataIndex].song_id);
-							}
+							click: (ctx, event) => location.href = `/charts/${json[ctx.dataIndex].date.substring(0, 10)}`
 						}
 					}
+				},
+				tooltip: {
+					yAlign: 'bottom'
 				},
 				scales: {
 					x: {

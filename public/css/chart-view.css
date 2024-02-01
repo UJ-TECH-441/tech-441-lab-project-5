@@ -15,16 +15,20 @@ td {
 	margin: auto;
 	border-spacing: 0;
 	border-collapse: separate;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
-#chart-table tr td {
+#chart-table > tbody > tr > td {
 	padding: .2rem .7rem;
 	border-bottom: solid 1px #ccc;
 }
 
+#chart-table > tbody > tr > td > a {
+	font-weight: 500;
+}
+
 #chart-table tr:first-child td {
-	font-weight: bold;
+	font-weight: 600;
 	background-color: #dedede;
 }
 
@@ -33,8 +37,12 @@ td {
 	text-align: right;
 }
 
+.top-40 {
+	background-color: #f3f9fe;
+}
+
 .change-new {
-	color: #6aadff;
+	color: #1469be;
 }
 
 .change-up {
@@ -46,5 +54,5 @@ td {
 }
 
 .change-none {
-	color: #ccc;
+	color: #777;
 }

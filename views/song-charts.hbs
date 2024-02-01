@@ -7,25 +7,32 @@
 
 <div id="chartjs-canvas-container">
 	<header>
-		<div class="title"></div>
+		<div class="title">
+			<span id="songTitle"></span> by <a href="/artists/{{artistId}}/songs">{{artistName}}</a>
+		</div>
 		<div id="artist-other-songs-container">
 			<div>
 				<select id="artist-other-songs"></select>
 			</div>
+			<div class="bold">
+				All {{artistName}} songs by:
+				<a class="bold" href="/artists/{{artistId}}/songs">Peak position</a> | <a class="bold" href="/artists/{{artistId}}/songs/charts">Weekly performance</a>
+			</div>
 			<div>
-				All songs by <span id="artist-other-songs-all"></span>:
-				<a href="/artists/{{artistId}}/songs">Peak position</a> | <a href="/artists/{{artistId}}/songs/charts">Weekly performance</a>
+				Click graph points to view full charts for each week
 			</div>
 		</div>
 	</header>
 	<span>
 		<canvas id="chartjs-canvas"></canvas>
 		<footer>
-			<div>
-				<select id="artists"></select>
-			</div>
-			<div>
-				<select id="chart-date"></select>
+			<div class="footer-select">
+				<div>
+					<select id="artists"></select>
+				</div>
+				<div>
+					<select id="chart-date"></select>
+				</div>
 			</div>
 		</footer>
 	</span>

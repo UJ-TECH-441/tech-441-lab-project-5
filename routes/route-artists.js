@@ -6,9 +6,9 @@ module.exports = app => {
 	app.get('/artists/:id/songs/charts', async (req, res, next) => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
-		const data = await database.select(`select name from artist where id='${artistId}'`);
+		const data = await database.select(`select * from artist where id='${artistId}'`);
 		if (data[0].length === 0) return res.sendStatus(404);
-		res.render('song-charts-all', { artistId });
+		res.render('song-charts-all', { artistId, artistName: data[0][0].name });
 	});
 
 	app.get('/artists/:id/songs', async (req, res, next) => {
@@ -54,7 +54,7 @@ module.exports = app => {
 		const artistId = req.params.id;
 		if (!artistId || !util.isValidUuid(artistId)) return res.sendStatus(400);
 		const data = await database.select(
-			`select * from artist_song_view where artist_id = '${req.params.id}' order by song_title`);
+			`select * from artist_song_view where artist_id = '${req.params.id}' order by first_week`);
 		if (data[0].length === 0) return res.sendStatus(404);
 		res.json(data[0]);
 	});

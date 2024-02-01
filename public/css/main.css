@@ -15,6 +15,14 @@ a, a:hover, a:active, a:visited {
 	text-decoration: none;
 }
 
+.bold {
+	font-weight: 500;
+}
+
+.black {
+	font-weight: 800;
+}
+
 header {
 	visibility: hidden;
 	display: flex;
@@ -23,7 +31,7 @@ header {
 	align-items: center;
 }
 
-.title, .title > a {
+.title, .title > a, .title > span {
 	font-weight: 500;
 	font-size: 1.5rem;
 	color: #1880e7;
@@ -34,9 +42,13 @@ header {
 	padding: 10px;
 }
 
+.title a {
+	text-decoration: underline;
+}
+
 .subtitle {
 	text-align: center;
-	padding: 10px;
+	padding-top: 10px;
 }
 
 #chartjs-canvas-container {
@@ -51,14 +63,18 @@ header {
 
 footer {
 	visibility: hidden;
+}
+
+.footer-select {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	border-top: dashed 1px #ccc;
-	padding: 30px 0;
+	margin: 20px 0;
+	padding: 20px 0;
 }
 
-footer > div {
+.footer-select > div {
 	margin: 0 20px;
 }

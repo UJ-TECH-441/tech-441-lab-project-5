@@ -7,6 +7,8 @@ module.exports = app => {
 		const data = await database.select(`select * from chart_view where date = '${req.params.date}' order by position`);
 		if (data[0].length === 0) return res.sendStatus(404);
 		data[0].forEach(data => {
+			data.isTop40 = data.position <= 40;
+			data.isTop10 = data.position <= 10;
 			if (data.last_week) {
 				data.changeNone = data.last_week === data.position;
 				data.changeUp = (data.last_week - data.position) > 0;

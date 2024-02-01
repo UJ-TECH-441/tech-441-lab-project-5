@@ -9,7 +9,9 @@ $(document).ready(function() {
 
 const selectArtist = () => {
 	const artistId = $('#artists').val();
-	getSongs(artistId);
+	location.href = `/artists/${artistId}/songs`;
+	//const artistId = $('#artists').val();
+	//getSongs(artistId);
 }
 
 const getSongs = artistId => {
@@ -29,11 +31,14 @@ const getSongs = artistId => {
 			datasets: [{
 				label: 'Chart Position',
 				data: json.map(song => song.peak_position),
-				borderColor: '#1880e7',
+				borderColor: '#a8cff7',
 				clip: false,
-				tension: 0.1,
-				pointRadius: 10,
-				pointBackgroundColor: '#1880e7'
+				pointRadius: 7,
+				pointBackgroundColor: '#1880e7',
+				pointBorderColor: '#1469be',
+				pointHoverRadius: 12,
+				pointHoverBackgroundColor: '#ffcc00',
+				pointHoverBorderColor: '#eabb00'
 			}],
 		};
 
@@ -48,9 +53,21 @@ const getSongs = artistId => {
 						$('footer').css('visibility', 'visible');
 					}
 				},
+				onClick: event => {
+					const points = currentChart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, true);
+					if (points.length) location.href = `/songs/${json[points[0].index].song_id}/charts`;
+				},
 				plugins: {
 					legend: {
 						position: 'top',
+						labels: {
+							color: 'black',
+							font: {
+								family: 'Rubik,sans-serif',
+								size: 13,
+								weight: 500
+							}
+						}
 					},
 					title: {
 						display: false,
@@ -65,12 +82,14 @@ const getSongs = artistId => {
 					datalabels: {
 						color: 'black',
 						font: {
-							size: 12,
+							size: 16,
 							family: 'Rubik,sans-serif',
-							weight: 'bold'
+							weight: 500
 						},
-						align: ctx => (json.length > 1 && ctx.dataIndex === json.length - 1) ? 'left' : 'right',
-						offset: 15,
+						rotation: 0,
+						align: ctx => ctx.dataIndex === 0 ? 'right' :
+							(json.length > 1 && ctx.dataIndex === json.length - 1) ? 'left' : 'bottom',
+						offset: 10,
 						formatter: (value, ctx) => json[ctx.dataIndex].song_title,
 						listeners: {
 							click: (ctx, event) =>

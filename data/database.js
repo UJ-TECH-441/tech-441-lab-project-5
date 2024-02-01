@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-// create a new MySQL connection
+
 const connect = async () => await mysql.createConnection({
 	host: 'localhost',
 	user: process.env.DATABASE_ID,

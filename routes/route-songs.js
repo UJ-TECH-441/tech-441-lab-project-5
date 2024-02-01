@@ -3,12 +3,11 @@ const util = require('../util');
 
 module.exports = app => {
 	app.get('/songs/:id/charts', async (req, res, next) => {
-		const data = await database.select(`select artist_id from song where id='${req.params.id}'`);
+		const data = await database.select(`select song.id as songId, artist.id as artistId, title as songTitle, 
+			artist.name as artistName from song inner join artist on song.artist_id = artist.id 
+			where song.id='${req.params.id}'`);
 		if (data[0].length === 0) return res.sendStatus(404);
-		res.render('song-charts', {
-			songId: req.params.id,
-			artistId: data[0][0].artist_id
-		});
+		res.render('song-charts', data[0][0]);
 	});
 
 	app.get('/fetch/songs/:id/charts', async (req, res, next) => {

@@ -18,21 +18,21 @@ const getCharts = artistId => {
 		return res.json();
 	})
 	.then(json => {
-		$('.title').html(`All songs by ${json.charts[0][0].artist_name}`);
+		//$('.title').html(`All songs by ${json.charts[0][0].artist_name}`);
 		if (currentChart) currentChart.destroy();
 		Chart.register(ChartDataLabels);
 		const data = {
 			labels: json.dates.map(date => date.substring(0, 10)),
 			datasets: json.charts.map(song => {
 				const data = {};
-				console.log(song);
 				song.forEach(song  => data[song.date.substring(0, 10)] = song.position);
 				return {
 					label: song[0].song_title,
 					data,
 					clip: false,
 					tension: 0.1,
-					pointRadius: 5
+					pointRadius: 5,
+					pointHoverRadius: 10
 				};
 			})
 		};
@@ -48,10 +48,20 @@ const getCharts = artistId => {
 						$('footer').css('visibility', 'visible');
 					}
 				},
+				onClick: (ctx, event) => {
+					const date = json.charts[event[0].datasetIndex][event[0].index].date.substring(0, 10);
+					location.href = `/charts/${date}`;
+				},
 				plugins: {
 					legend: {
 						position: 'top',
-						maxWidth: 300,
+						labels: {
+							color: 'black',
+							font: {
+								family: 'Rubik,sans-serif',
+								size: 12
+							}
+						},
 						onClick: (event, legendItem, legend) => {
 							const songId = json.charts[legendItem.datasetIndex][0].song_id;
 							location.href = `/songs/${songId}/charts`;
