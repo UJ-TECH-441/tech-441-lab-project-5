@@ -63,7 +63,7 @@ const getSongs = artistId => {
 							font: {
 								family: 'Rubik,sans-serif',
 								size: 13,
-								weight: 500
+								weight: 600
 							}
 						}
 					},
@@ -74,7 +74,7 @@ const getSongs = artistId => {
 						font: {
 							size: 24,
 							family: 'Rubik,sans-serif',
-							weight: 500
+							weight: 600
 						}
 					},
 					datalabels: {
@@ -82,13 +82,17 @@ const getSongs = artistId => {
 						font: {
 							size: 16,
 							family: 'Rubik,sans-serif',
-							weight: 500
+							weight: 600
 						},
 						rotation: 0,
 						align: ctx => ctx.dataIndex === 0 ? 'right' :
 							(json.length > 1 && ctx.dataIndex === json.length - 1) ? 'left' : 'bottom',
 						offset: 10,
-						formatter: (value, ctx) => json[ctx.dataIndex].song_title,
+						formatter: (value, ctx) => {
+							let title = json[ctx.dataIndex].song_title;
+							if (title.length >= 8) title = title.replace(/^(.{8}\w*)\s/, '$1\n');
+							return `#${json[ctx.dataIndex].peak_position} ${title}`;
+						},
 						listeners: {
 							click: (ctx, event) =>
 								location.href = `/songs/${json[ctx.dataIndex].song_id}/charts`

@@ -92,7 +92,7 @@ const getCharts = songId => {
 							font: {
 								family: 'Rubik,sans-serif',
 								size: 13,
-								weight: 500
+								weight: 600
 							}
 						}
 					},
@@ -101,7 +101,7 @@ const getCharts = songId => {
 						font: {
 							size: 16,
 							family: 'Rubik,sans-serif',
-							weight: 500
+							weight: 600
 						},
 						align: 'bottom',
 						offset: 10,

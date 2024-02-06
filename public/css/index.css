@@ -1,6 +1,6 @@
 main {
 	text-align: center;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 main > div {
@@ -9,7 +9,7 @@ main > div {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 select {
